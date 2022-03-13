@@ -35,19 +35,21 @@ public struct Sideways<Content: View>: View {
     @State private var contentWidth: CGFloat = 0
     
     public var body: some View {
-        ScrollView(.horizontal, showsIndicators: showIndicators) {
-            content()
-                .frame(minWidth: minWidth)
-                .background(
-                    GeometryReader { geo -> Color in
-                        DispatchQueue.main.async {
-                            contentWidth = geo.size.width
+        GeometryReader { geo in
+            ScrollView(.horizontal, showsIndicators: showIndicators) {
+                content()
+                    .frame(minWidth: max(geo.size.width, minWidth))
+                    .background(
+                        GeometryReader { geo -> Color in
+                            DispatchQueue.main.async {
+                                contentWidth = geo.size.width
+                            }
+                            return Color.clear
                         }
-                        return Color.clear
-                    }
-                )
+                    )
+            }
+            .frame(maxWidth: min(geo.size.width, contentWidth))
         }
-        .frame(maxWidth: contentWidth)
     }
 }
 
