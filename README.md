@@ -13,12 +13,13 @@ macOS | iOS
 ## Features
 
 * Support the horizontal scrolling of wide content, such as tabular data, in compact views
+* Available as a conventional view that can wrap your content, and also as a View Modifier
 * Presently targeting macOS v11+ and iOS v14+\*
 * No external dependencies!
 
 ## Sideways Examples
 
-Excerpt from use with `List`:
+Use with any wide content, such as `List`:
 
 ```swift
 import SwiftUI
@@ -28,27 +29,31 @@ struct ContentView: View {
 
     var body: some View {
         List {
-            Text("🍇 Pinot Noir")
-            Text("🍇 Cabernet Sauvignon")
-            Text("🍇 Shiraz")
-            Text("🍇 Zinfandel")
-            Text("🍇 Gamay noir")
-            Text("🍇 Grenache")
-            Text("🍇 Cabernet Franc")
-            Text("🍇 Merlot")
+            Text("🍇 Pinot Noir, 🍇 Blauburgunder, 🍇 Spätburgunder, 🍇 Rulandské modré, 🍇 Pinot Nero")
+            Text("🍇 Cabernet Sauvignon, 🍇 Bouchet, 🍇 Bouche, 🍇 Petit-Bouchet, 🍇 Petit-Cabernet, 🍇 Petit-Vidure, 🍇 Vidure, 🍇 Sauvignon Rouge")
+            Text("🍇 Syrah, 🍇 Shiraz, 🍇 Hermitage, 🍇 Antourenein noir, 🍇 Candive")
+            Text("🍇 Gamay, 🍇 Gamay Noir à Jus Blanc Sicily")
+            Text("🍇 Grenache, 🍇 Garnatxa negre, 🍇 Alicante, 🍇 Cannonau, 🍇 Garnacha tinta, 🍇 Grenache noir")
+            Text("🍇 Cabernet Franc, 🍇 Bouchet, 🍇 Bouchy, 🍇 Breton")
+            Text("🍇 Malbec, 🍇 Auxerrois in Cahors, 🍇 Côt, 🍇 Pressac")
+            Text("🍇 Merlot, 🍇 Saint-Macaire, 🍇 Picard, 🍇 Langon")
+            Text("🍇 Petit Verdot, 🍇 Verdot")
         }
-        .sideways(minWidth: 100)
+        .sideways(minWidth: 1200, showIndicators: true)
+        .frame(width: 400)
     }
 }
 ```
 
-...where `minWidth` is the narrowest width to constrain your content. It can be narrower (or wider) than the view width available.
+...where the `minWidth` of 1200 specifies the width of your content in the scrollable region. 
 
-You can also use as a view wrapper:
+The frame width of 400 is the viewport size. It's explicit here, but often it's implicit and not necessary to specify.
+
+You can also wrap your content in a `Sideways` view:
 
 ```swift
 var body: some View {
-    Sideways(minWidth: 400) {
+    Sideways(minWidth: 1200) {
         List {
             ...
         }
@@ -56,14 +61,14 @@ var body: some View {
 }
 ```
 
-Or an excerpt from use with _TablerList_...
+Or an excerpt from use with the companion component _TablerList_...
 
 ```swift
 var body: some View {
     TablerList(header: header,
                row: row,
                results: fruits)
-        .sideways(minWidth: 400)
+        .sideways(minWidth: 1200)
 }
 ```
 
@@ -73,6 +78,10 @@ Based on code and ideas found at:
 
 * [onmyway133](https://github.com/onmyway133/blog/issues/769)
 * [NuPlay](https://github.com/NuPlay/FitScrollView)
+
+And the OG software...
+
+![](https://github.com/openalloc/SwiftSideways/blob/main/Images/sw.jpg)
 
 ## See Also
 
