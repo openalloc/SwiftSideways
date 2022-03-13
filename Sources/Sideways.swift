@@ -32,32 +32,34 @@ public struct Sideways<Content: View>: View {
         self.content = content
     }
     
-    @State private var contentWidth: CGFloat = 0
+//    @State private var contentWidth: CGFloat = 0
     
     public var body: some View {
         GeometryReader { geo in
             ScrollView(.horizontal, showsIndicators: showIndicators) {
                 content()
                     .frame(minWidth: max(geo.size.width, minWidth))
-                    .background(
-                        GeometryReader { geo -> Color in
-                            DispatchQueue.main.async {
-                                contentWidth = geo.size.width
-                            }
-                            return Color.clear
-                        }
-                    )
+//                    .background(
+//                        GeometryReader { geoBG -> Color in
+//                            DispatchQueue.main.async {
+//                                contentWidth = geoBG.size.width
+//                            }
+//                            return Color.clear
+//                        }
+//                    )
             }
-            .frame(maxWidth: min(geo.size.width, contentWidth))
+            //.frame(maxWidth: contentWidth)
+            // NOTE no apparent need to restrict maxWidth
+            //.frame(maxWidth: min(geo.size.width, contentWidth))
         }
     }
 }
 
 extension View {
     public func sideways(minWidth: CGFloat,
-                               showIndicators: Bool = false) -> some View {
+                         showIndicators: Bool = false) -> some View {
         Sideways(minWidth: minWidth,
-                       showIndicators: showIndicators) {
+                 showIndicators: showIndicators) {
             self
         }
     }
