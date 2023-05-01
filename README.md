@@ -85,8 +85,6 @@ And the OG software...
 
 ## See Also
 
-* [SwiftSideways](https://github.com/openalloc/SwiftSideways) - minimal horizontal scroller wrapper
-
 This library is a member of the _OpenAlloc Project_.
 
 * [_OpenAlloc_](https://openalloc.github.io) - product website for all the _OpenAlloc_ apps and libraries
